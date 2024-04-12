@@ -3,6 +3,7 @@
 #include <fstream>
 #include <stdio.h>
 #include <conio.h>
+#include <ctime>
 
 using namespace std;
 
@@ -576,7 +577,7 @@ start:
     int choice;
     while (true)
     {
-        system("cls");
+        system( "cls" );
         cout << "  ........................................................................\n";
         cout << " >>>                 SUPERMARKET MANAGEMENT SYSTEM                      <<< \n";
         cout << "  ........................................................................\n";
@@ -646,6 +647,7 @@ start:
 
 void product ::add()
 {
+
 start:
     fstream data;
     int c;
@@ -664,6 +666,12 @@ start:
     cin >> price;
     cout << "\n 4. Discount on Product (%) : ";
     cin >> discount;
+    cout << "\n 5. A manufacture date: ";
+    cin >> MFGDate;
+    cout << "\n 6. Expiry date: ";
+    cin >> ExpDate;
+
+
 
     data.open("datafile.txt", ios::in); //
 
@@ -723,7 +731,7 @@ void product ::modify()
     int c;
     float p;
     float d;
-    string n;
+    string n, MFG, Exp;
     cout << "\n______MODIFY PRODUCT______\n";
     cout << "\n Enter Product Code  : ";
     cin >> key;
@@ -752,8 +760,11 @@ void product ::modify()
                 cin >> p;
                 cout << "\n 4. Discount on Product (%) : ";
                 cin >> d;
-
-                data1 << " " << c << "\t\t" << n << "\t\t" << p << "\t\t" << d << "\n";
+                cout << "\n 5. A manufacture date: ";
+                cin >> MFG;
+                cout << "\n 6. Expiry date: ";
+                cin >> Exp;
+                data1 << " " << c << "\t\t" << n << "\t\t" << p << "\t\t" << d << "\n" << MFG << "\n" << Exp << "\n";
                 cout << "\nModify Product Successfully !!" << endl;
                 flat++; // incrementing flat bcs we find the product with the same product code
             }
@@ -803,7 +814,7 @@ void product ::rem()
     else
     {
         data1.open("datafile1.txt", ios::app | ios::out);
-        data >> productcode >> productname >> price >> discount; // getting the values of the different variables so that we can iterate over the file
+        data >> productcode >> productname >> price >> discount >> MFGDate >> ExpDate; // getting the values of the different variables so that we can iterate over the file
 
         while (!data.eof()) // we will iterate till the end of the file
         {
@@ -853,9 +864,9 @@ void product ::search()
     else
     {
         cout << "\n_________________________________________________________________________________________\n";
-        cout << "Code\t\tName\t\tPrime cost($)\t\tDiscount(%)\t\tPrice($)";
+        cout << "Code\t\tName\t\tPrime cost($)\t\tDiscount(%)\t\tPrice($)\t\tDate of the manufacturer(Date)\t\t Expiry date(Date)";
         cout << "\n_________________________________________________________________________________________\n";
-        data >> productcode >> productname >> price >> discount;
+        data >> productcode >> productname >> price >> discount >> MFGDate >> ExpDate;
         while (!data.eof()) // we will iterate till the end of the file
         {
             if (productcode == key)
@@ -876,29 +887,36 @@ void product ::search()
         getch();
     }
 }
+
 // this function will displays all the items present to the users
 void product ::list()
 {
+
     fstream data;
+
     data.open("datafile.txt", ios::in);
+
     cout << "\n\t\t\t\t<<< PRODUCTS LIST >>>";
     cout << "\n_________________________________________________________________________________________\n";
     cout << "Code\t\tName\t\tPrime cost($)\t\tDiscount(%)\t\tPrice($)";
     cout << "\n_________________________________________________________________________________________\n";
-    data >> productcode >> productname >> price >> discount;
+    data >> productcode >> productname >> price >> discount >> MFGDate >> ExpDate;
 
     while (!data.eof())
     {
-        cout << productcode << "\t\t" << productname << "\t\t" << price << "\t\t\t" << discount << "\t\t\t " << price - price * (discount / 100) << "\n";
-        data >> productcode >> productname >> price >> discount; // for iteration purpose
+        cout << productcode << "\t\t" << productname << "\t\t" << price << "\t\t\t" << discount << "\t\t\t " << price - price * (discount / 100) << "\t\t\t" << MFGDate << "\t\t\t" << ExpDate << "\n";
+        data >> productcode >> productname >> price >> discount >> MFGDate >> ExpDate; // for iteration purpose
     }
     cout << "_________________________________________________________________________________________\n";
+
     data.close();
 }
 
 void product ::receipt()
 {
+
 start:
+
     fstream data;
     int arrc[100]; // we are taking a array to hold the code of the various product
     int arrq[100]; // we are taking a array to hold the quantity of each product
@@ -912,6 +930,7 @@ start:
     float total = 0;
     float cash = 0;
     float change = 0;
+    
     system("cls");
     cout << "  ........................................................................\n";
     cout << " >>>                 SUPERMARKET MANAGEMENT SYSTEM                      <<< \n";

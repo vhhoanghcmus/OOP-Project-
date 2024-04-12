@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-
 class shopping
 {
 public:
@@ -38,16 +37,27 @@ public:
 class product : public shopping
 {
 private:
+
     int productcode;    // product code
     std :: string productname; // name of the product
     float price;
     float discount; // discount
+    string MFGDate; // date of
+    string ExpDate; // date of
+
 public:
+
     void products();
+
     void add();     // to add a product
+
     void modify();  // to edit a prodcut
+
     void rem();     // to remove a product
+
     void search();  // to search a product
+
     void list();    // to list all products
+
     void receipt(); // to get the receipt
 };
