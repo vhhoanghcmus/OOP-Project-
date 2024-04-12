@@ -42,8 +42,8 @@ private:
     std :: string productname; // name of the product
     float price;
     float discount; // discount
-    string MFGDate; // date of
-    string ExpDate; // date of
+    std :: string MFGDate; // date of
+    std :: string ExpDate; // date of
 
 public:
 
